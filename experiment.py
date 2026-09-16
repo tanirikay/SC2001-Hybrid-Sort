@@ -1,12 +1,13 @@
 import matplotlib.pyplot as plt
 import math
+from hybrid_sort import generate_random_array, run_hybrid_sort, run_merge_sort
 #Import hybrid sort and random array here
 #get_dataset(n) --> random array from (b)
 #hybrid_sort(arr, s) --> sort algorithm from (a)
 n_values = [1000,2000,5000,10000,20000,50000,100000,200000,500000,1000000,2000000,5000000,10000000]
 S = 20
 comparison_results = []
-theoretical_retults = []
+theoretical_results = []
 ratios = []
 
 #----------------------
@@ -14,8 +15,8 @@ ratios = []
 #----------------------
 
 for n in n_values:
-    arr = get_dataset(n)
-    comparison = hybrid_sort(arr, s)
+    arr = generate_random_array(n)
+    comparison = run_hybrid_sort(arr, S)
     comparison_results.append(comparison)
     print("n =", n, "comparison =", comparison)
 
@@ -23,12 +24,12 @@ for n in n_values:
 for n in n_values:
     #calculate n log2 n, log2 is used because merge sort split into 2 halves
     theoretical = n * math.log2(n)
-    theoretical_retults.append(theoretical)
+    theoretical_results.append(theoretical)
 
 #Comparing empirical results with theoretical analysis
 for i in range(len(n_values)):
     #if ratio is about '1', it shows that time complexity is (n log n)
-    ratio = comparison_results[i]/theoretical_retults[i]
+    ratio = comparison_results[i]/theoretical_results[i]
     ratios.append(ratio)
     print("n =",n_values[i] , f"ratio = {ratio:.2f}")
 

@@ -78,3 +78,35 @@ def hybrid_sort(arr, temp, left, right, S, counter):
     hybrid_sort(arr, temp, mid + 1, right, S, counter)
 
     merge(arr, temp, left, mid, right, counter)
+
+
+def merge_sort(arr, temp, left, right, counter):
+    if left >= right:
+        return
+    mid = (left + right) // 2
+    merge_sort(arr, temp, left, mid, counter)
+    merge_sort(arr, temp, mid + 1, right, counter)
+    merge(arr, temp, left, mid, right, counter)
+
+
+def run_hybrid_sort(arr, S):
+    a = arr[:]
+    temp = [0] * len(a)
+    counter = Counter()
+    if len(a) > 0:
+        hybrid_sort(a, temp, 0, len(a) - 1, S, counter)
+    return counter.value
+
+
+def run_merge_sort(arr):
+    a = arr[:]
+    temp = [0] * len(a)
+    counter = Counter()
+    if len(a) > 0:
+        merge_sort(a, temp, 0, len(a) - 1, counter)
+    return counter.value
+
+
+def generate_random_array(n, seed=42):
+    rng = random.Random(seed)
+    return [rng.randint(1, n) for _ in range(n)]
